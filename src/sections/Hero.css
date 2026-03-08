@@ -1,0 +1,272 @@
+/* ─── Base (large screens 1440px+) ──────────────────────────────────── */
+
+.hero-section {
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    position: relative;
+    overflow: hidden;
+}
+
+.hero-content {
+    position: relative;
+    z-index: 10;
+    width: 100%;
+}
+
+/* Avatar — right side, vertically centred */
+.hero-visual {
+    position: absolute;
+    right: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    width: clamp(300px, 32vw, 480px);
+    height: clamp(300px, 32vw, 480px);
+    pointer-events: none;
+    z-index: 100;
+    display: block !important;
+}
+
+.hero-avatar-container {
+    width: 100%;
+    height: 100%;
+}
+
+.rive-container {
+    width: 100%;
+    height: 100%;
+}
+
+/* Title */
+.hero-title-wrapper h1 {
+    letter-spacing: -0.05em;
+    color: var(--color-text);
+}
+
+/* Bio + scroll indicator row */
+.hero-bottom {
+    margin-top: var(--space-lg);
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+}
+
+/* Left column: role, bio, tags, links */
+.hero-about {
+    display: flex;
+    flex-direction: column;
+    gap: 0.9rem;
+    max-width: 46%;
+}
+
+.hero-role {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    font-size: 0.8rem;
+    opacity: 0.55;
+    letter-spacing: 0.12em;
+}
+
+.hero-bio {
+    font-size: 1.05rem;
+    line-height: 1.75;
+    color: var(--color-text);
+}
+
+.word-span {
+    display: inline;
+    will-change: opacity, color;
+}
+
+.hero-stack {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.45rem;
+    margin-top: 0.1rem;
+}
+
+.hero-tag {
+    font-size: 0.65rem;
+    padding: 0.28rem 0.75rem;
+    border: 1px solid rgba(61, 48, 37, 0.2);
+    border-radius: 100px;
+    opacity: 0.65;
+    letter-spacing: 0.06em;
+    transition: all 0.2s ease;
+    white-space: nowrap;
+}
+
+.hero-tag:hover {
+    opacity: 1;
+    border-color: var(--color-primary);
+    color: var(--color-primary);
+}
+
+.hero-links {
+    display: flex;
+    gap: 1.5rem;
+    margin-top: 0.1rem;
+}
+
+.hero-link {
+    font-size: 0.85rem;
+    opacity: 0.5;
+    letter-spacing: 0.08em;
+    transition: opacity 0.2s ease, color 0.2s ease;
+}
+
+.hero-link:hover {
+    opacity: 1;
+    color: var(--color-primary);
+}
+
+.scroll-indicator {
+    width: 1px;
+    background: var(--color-text);
+    margin-right: 2rem;
+    opacity: 0.4;
+}
+
+/* PRISM-inspired glow */
+.hero-glow {
+    position: absolute;
+    top: 50%;
+    right: -10%;
+    width: 60vw;
+    height: 60vw;
+    background: radial-gradient(circle,
+            rgba(239, 109, 88, 0.15) 0%,
+            rgba(93, 109, 62, 0.1) 30%,
+            rgba(242, 238, 232, 0) 70%);
+    filter: blur(80px);
+    z-index: 1;
+    pointer-events: none;
+}
+
+/* ─── Mac Laptop (1024px – 1440px) ─────────────────────────────────── */
+@media (max-width: 1440px) and (min-width: 1025px) {
+    .hero-visual {
+        width: clamp(260px, 28vw, 400px);
+        height: clamp(260px, 28vw, 400px);
+        right: clamp(1rem, 3vw, 4rem);
+        top: 50%;
+        transform: translateY(-50%);
+    }
+
+    .hero-bottom {
+        margin-top: clamp(2rem, 4vh, 4rem);
+    }
+
+    .hero-about {
+        max-width: 48%;
+        gap: 0.75rem;
+    }
+
+    .hero-bio {
+        font-size: 1rem;
+        line-height: 1.7;
+    }
+
+    .hero-stack {
+        /* All 5 tags fit on one line at this size */
+        flex-wrap: nowrap;
+    }
+}
+
+/* ─── Smaller Mac / tablets (768px – 1024px) ───────────────────────── */
+@media (max-width: 1024px) and (min-width: 769px) {
+    .hero-visual {
+        width: clamp(220px, 24vw, 320px);
+        height: clamp(220px, 24vw, 320px);
+        right: 1rem;
+        bottom: 0;
+    }
+
+    .hero-about {
+        max-width: 55%;
+    }
+
+    .hero-bio {
+        font-size: 0.95rem;
+    }
+
+    .hero-bottom {
+        margin-top: clamp(1.5rem, 3vh, 3rem);
+    }
+}
+
+/* ─── Mobile (≤ 768px) ────────────────────────────────────────────── */
+@media (max-width: 768px) {
+    .hero-section {
+        justify-content: flex-start;
+        padding-top: 5rem;
+        /* clear the fixed navbar */
+    }
+
+    .hero-content {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+    }
+
+    /* Pull avatar out of absolute flow on mobile */
+    .hero-visual {
+        position: relative;
+        top: auto;
+        right: auto;
+        bottom: auto;
+        transform: none;
+        width: 220px;
+        height: 220px;
+        margin: 1.5rem auto;
+        z-index: 5;
+    }
+
+    .hero-title-wrapper {
+        width: 100%;
+    }
+
+    .hero-title-wrapper h1 {
+        font-size: clamp(3rem, 16vw, 6rem);
+        text-align: center;
+    }
+
+    .hero-bottom {
+        flex-direction: column;
+        align-items: center;
+        gap: 1.25rem;
+        margin-top: 1rem;
+        text-align: center;
+    }
+
+    .hero-about {
+        max-width: 100%;
+        align-items: center;
+    }
+
+    .hero-bio {
+        font-size: 0.95rem;
+    }
+
+    .hero-stack {
+        justify-content: center;
+        flex-wrap: wrap;
+    }
+
+    .hero-links {
+        justify-content: center;
+    }
+
+    .scroll-indicator {
+        display: none;
+    }
+
+    .hero-glow {
+        right: -30%;
+        width: 100vw;
+        height: 100vw;
+    }
+}

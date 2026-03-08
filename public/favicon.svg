@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" width="100" height="100">
+  <!-- Dark brown square, no rounded corners -->
+  <rect width="100" height="100" rx="0" fill="#3D3025"/>
+
+  <!-- H in cream -->
+  <rect x="14" y="14" width="22" height="72" fill="#F2EEE8"/>
+  <rect x="36" y="44" width="28" height="12" fill="#F2EEE8"/>
+  <rect x="64" y="14" width="22" height="52" fill="#F2EEE8"/>
+  <!-- Coral accent at bottom of right leg -->
+  <rect x="64" y="66" width="22" height="20" fill="#EF6D58"/>
+</svg>

@@ -1,0 +1,37 @@
+:root {
+    /* Color Palette - Earthy / Agency Aesthetic */
+    --color-bg: #F2EEE8;
+    --color-text: #3D3025;
+    --color-primary: #EF6D58;
+    /* Coral Accent */
+    --color-secondary: #5D6D3E;
+    /* Green Accent */
+    --color-muted: #DDB8A6;
+    /* Soft Brown */
+    --color-dark: #1A1714;
+    --color-white: #FFFFFF;
+
+    /* Typography */
+    --font-main: 'Inter', sans-serif;
+    --font-heading: 'Integral CF', 'Inter', sans-serif;
+    /* Fallback to Inter Black */
+    --font-mono: 'JetBrains Mono', monospace;
+
+    /* Spacing */
+    --space-xs: 0.5rem;
+    --space-sm: 1rem;
+    --space-md: 2rem;
+    --space-lg: 4rem;
+    --space-xl: 8rem;
+
+    /* Transitions */
+    --transition-smooth: all 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+    --transition-fast: all 0.3s ease;
+}
+
+@font-face {
+    font-family: 'Integral CF';
+    src: url('https://fonts.cdnfonts.com/s/72126/IntegralCF-Bold.woff') format('woff');
+    font-weight: bold;
+    font-style: normal;
+}

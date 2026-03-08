@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" width="100" height="100">
+  <!-- Dark brown background, no border-radius -->
+  <rect width="100" height="100" rx="0" fill="#3D3025"/>
+
+  <!-- H in cream (#F2EEE8) — thick legs, thinner crossbar -->
+  <!-- Left leg -->
+  <rect x="14" y="14" width="22" height="72" fill="#F2EEE8"/>
+  <!-- Crossbar (starts after the left leg gap) -->
+  <rect x="36" y="44" width="28" height="12" fill="#F2EEE8"/>
+  <!-- Right leg — top portion (cream) -->
+  <rect x="64" y="14" width="22" height="52" fill="#F2EEE8"/>
+  <!-- Coral accent — bottom portion of right leg -->
+  <rect x="64" y="66" width="22" height="20" fill="#EF6D58"/>
+</svg>

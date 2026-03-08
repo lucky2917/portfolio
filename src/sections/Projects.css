@@ -1,0 +1,200 @@
+/* ─── Scroll Wrapper (provides vertical scroll for horizontal pan) ── */
+.projects-scroll-wrapper {
+    height: 500vh;
+    position: relative;
+}
+
+/* ─── Sticky Container ─────────────────────────────────────────────── */
+.projects-sticky {
+    position: sticky;
+    top: 0;
+    height: 100vh;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+}
+
+/* ─── Header ───────────────────────────────────────────────────────── */
+.projects-header-wrap {
+    padding-top: var(--space-xl);
+    padding-bottom: var(--space-md);
+    flex-shrink: 0;
+}
+
+.projects-header {
+    display: flex;
+    align-items: center;
+    gap: var(--space-md);
+}
+
+.line-divider {
+    flex-grow: 1;
+    height: 1px;
+    background-color: var(--color-muted);
+}
+
+/* ─── Horizontal Track ─────────────────────────────────────────────── */
+.projects-track-outer {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    /* Align row to container left edge */
+    padding-left: clamp(2rem, 5vw, 4rem);
+    overflow: visible;
+}
+
+.projects-track {
+    display: flex;
+    flex-direction: row;
+    gap: 2rem;
+    width: max-content;
+    will-change: transform;
+    /* Leave space at the right end so last card centers comfortably */
+    padding-right: clamp(2rem, 5vw, 4rem);
+}
+
+/* ─── Project Card ─────────────────────────────────────────────────── */
+.project-card {
+    display: flex;
+    flex-direction: column;
+    width: clamp(280px, 36vw, 520px);
+    flex-shrink: 0;
+    cursor: pointer;
+}
+
+.project-image-wrapper {
+    aspect-ratio: 4/3;
+    width: 100%;
+    position: relative;
+    overflow: hidden;
+    border-radius: 6px;
+    transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+    margin-bottom: var(--space-md);
+}
+
+.project-card:hover .project-image-wrapper {
+    transform: scale(0.97);
+}
+
+.project-metric {
+    position: absolute;
+    bottom: var(--space-md);
+    left: var(--space-md);
+    background: var(--color-bg);
+    padding: 0.4rem 0.9rem;
+    font-size: 0.7rem;
+    border-radius: 100px;
+    text-transform: uppercase;
+    opacity: 0.9;
+}
+
+.project-number {
+    position: absolute;
+    top: var(--space-md);
+    right: var(--space-md);
+    font-size: 0.7rem;
+    letter-spacing: 0.1em;
+    background: rgba(26, 23, 20, 0.55);
+    color: #F2EEE8;
+    padding: 0.25rem 0.6rem;
+    border-radius: 100px;
+    backdrop-filter: blur(6px);
+}
+
+/* ─── Card Info ────────────────────────────────────────────────────── */
+.project-info {
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+}
+
+.project-category {
+    font-size: 0.72rem;
+    color: var(--color-secondary);
+    margin-bottom: 0.4rem;
+    letter-spacing: 0.1em;
+}
+
+.project-title {
+    font-size: 1.6rem;
+    margin-bottom: 0.6rem;
+    letter-spacing: -0.02em;
+}
+
+.project-desc {
+    font-size: 0.9rem;
+    color: var(--color-text);
+    opacity: 0.7;
+    max-width: 88%;
+    margin-bottom: 1.25rem;
+    line-height: 1.6;
+    flex-grow: 1;
+}
+
+.view-project-link {
+    align-self: flex-start;
+    font-size: 0.72rem;
+    text-transform: uppercase;
+    border-bottom: 1px solid var(--color-primary);
+    padding-bottom: 3px;
+    letter-spacing: 0.08em;
+    opacity: 0.8;
+    transition: opacity 0.2s ease, color 0.2s ease;
+}
+
+.view-project-link:hover {
+    opacity: 1;
+    color: var(--color-primary);
+}
+
+/* ─── Progress Bar ─────────────────────────────────────────────────── */
+.projects-progress-bar {
+    position: absolute;
+    bottom: 2rem;
+    left: clamp(2rem, 5vw, 4rem);
+    right: clamp(2rem, 5vw, 4rem);
+    height: 1px;
+    background: rgba(61, 48, 37, 0.15);
+}
+
+.projects-progress-fill {
+    height: 100%;
+    background: var(--color-primary);
+    transform-origin: left;
+}
+
+/* ─── Mobile Fallback ──────────────────────────────────────────────── */
+@media (max-width: 768px) {
+    .projects-scroll-wrapper {
+        height: auto;
+    }
+
+    .projects-sticky {
+        position: relative;
+        height: auto;
+        overflow: visible;
+        padding-bottom: var(--space-xl);
+    }
+
+    .projects-header-wrap {
+        padding-top: var(--space-lg);
+    }
+
+    .projects-track-outer {
+        overflow-x: auto;
+        padding-bottom: 1rem;
+        -webkit-overflow-scrolling: touch;
+    }
+
+    .projects-track {
+        padding-right: clamp(2rem, 5vw, 4rem);
+    }
+
+    .project-card {
+        width: 80vw;
+    }
+
+    .projects-progress-bar {
+        display: none;
+    }
+}
