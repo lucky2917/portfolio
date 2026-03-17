@@ -34,4 +34,6 @@
     src: url('https://fonts.cdnfonts.com/s/72126/IntegralCF-Bold.woff') format('woff');
     font-weight: bold;
     font-style: normal;
+    font-display: swap;
+    /* Prevent FOIT in Safari — show fallback font immediately */
 }

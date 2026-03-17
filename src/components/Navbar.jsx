@@ -12,7 +12,6 @@ const Navbar = () => {
             setIsScrolled(window.scrollY > 50)
         }
         window.addEventListener('scroll', handleScroll)
-
         const timer = setInterval(() => setTime(new Date()), 1000)
 
         return () => {
@@ -23,8 +22,10 @@ const Navbar = () => {
 
     const navItems = [
         { name: 'Work', href: '#work' },
-        { name: 'Exp', href: '#experience' },
-        { name: 'Talk', href: '#contact' }
+        { name: 'Skills', href: '#skills' },
+        { name: 'GitHub', href: '#github' },
+        { name: 'Resume', href: '#resume' },
+        { name: 'Contact', href: '#contact' }
     ]
 
     const formatTime = (date) => {
@@ -37,6 +38,7 @@ const Navbar = () => {
 
     const handleScrollTo = (e, id) => {
         e.preventDefault()
+        setIsOpen(false)
         if (window.lenis) {
             window.lenis.scrollTo(id)
         } else {
@@ -59,7 +61,7 @@ const Navbar = () => {
 
                 <div className="nav-right">
                     <ul className="nav-links">
-                        {navItems.map((item, index) => (
+                        {navItems.map((item) => (
                             <li key={item.name}>
                                 <a
                                     href={item.href}
@@ -89,10 +91,7 @@ const Navbar = () => {
                             <a
                                 key={item.name}
                                 href={item.href}
-                                onClick={(e) => {
-                                    setIsOpen(false)
-                                    handleScrollTo(e, item.href)
-                                }}
+                                onClick={(e) => handleScrollTo(e, item.href)}
                                 className="mobile-nav-link text-huge"
                             >
                                 {item.name}

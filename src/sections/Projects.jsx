@@ -1,7 +1,8 @@
 import React, { useRef, useState } from 'react'
 import { motion, useScroll, useMotionValue, useMotionValueEvent, AnimatePresence } from 'framer-motion'
+import { ArrowUpRight, Eye } from 'lucide-react'
 import ProjectModal from '../components/ProjectModal'
-import './Projects.css'
+import '../styles/Projects.css'
 
 const projects = [
     {
@@ -22,7 +23,8 @@ const projects = [
             'Geospatial delivery validation using the Haversine formula',
             'WebSocket-based real-time updates with ~200ms API latency',
             '92+ Lighthouse score via lazy loading and query optimization'
-        ]
+        ],
+        highlights: ['Real-time', 'Supabase', '92+ Score']
     },
     {
         title: 'SkillHire',
@@ -42,7 +44,8 @@ const projects = [
             'Protection against SQL injection and XSS attacks',
             'Employer tools for candidate comparison and skill mapping',
             'Performance analytics for data-driven shortlisting'
-        ]
+        ],
+        highlights: ['Hackathon', 'Blind Eval', 'Secure']
     },
     {
         title: 'BYG',
@@ -62,7 +65,8 @@ const projects = [
             'Bcrypt hashing and secure session management',
             'Admin dashboard for bookings, revenue, and add-on monitoring',
             'Role-based access control across the platform'
-        ]
+        ],
+        highlights: ['Admin Panel', 'Dynamic Pricing', 'OTP Auth']
     },
     {
         title: 'Portfolio',
@@ -81,7 +85,8 @@ const projects = [
             'Horizontal scroll-linked project cards',
             'Glassmorphism modal with animated gradient border',
             'Custom cursor follower and smooth scrolling'
-        ]
+        ],
+        highlights: ['Scroll-Driven', 'Animations', 'Custom']
     }
 ]
 
@@ -91,6 +96,7 @@ const Projects = () => {
     const x = useMotionValue(0)
     const [selectedProject, setSelectedProject] = useState(null)
     const [selectedIndex, setSelectedIndex] = useState(0)
+    const [hoveredIndex, setHoveredIndex] = useState(-1)
 
     const { scrollYProgress } = useScroll({
         target: wrapperRef,
@@ -112,10 +118,28 @@ const Projects = () => {
     return (
         <div ref={wrapperRef} className="projects-scroll-wrapper">
             <section id="work" className="projects-sticky">
+                {/* Dark layered background */}
+                <div className="projects-bg">
+                    <div className="projects-bg-gradient" />
+                    <div className="projects-bg-noise" />
+                    <div className="projects-bg-glow projects-bg-glow-1" />
+                    <div className="projects-bg-glow projects-bg-glow-2" />
+                </div>
+
                 <div className="container projects-header-wrap">
                     <header className="projects-header">
-                        <h2 className="text-mono text-coral">Selected Work</h2>
-                        <div className="line-divider" />
+                        <motion.div
+                            initial={{ opacity: 0, y: 20 }}
+                            whileInView={{ opacity: 1, y: 0 }}
+                            viewport={{ once: true }}
+                            className="projects-header-content"
+                        >
+                            <h2 className="projects-section-title">
+                                SELECTED WORK<span className="text-coral">.</span>
+                            </h2>
+                            
+                        </motion.div>
+                        
                     </header>
                 </div>
 
@@ -128,12 +152,14 @@ const Projects = () => {
                         {projects.map((project, index) => (
                             <motion.div
                                 key={project.title}
-                                initial={{ opacity: 0, y: 20 }}
+                                initial={{ opacity: 0, y: 30 }}
                                 whileInView={{ opacity: 1, y: 0 }}
                                 viewport={{ once: true }}
-                                transition={{ delay: index * 0.05 }}
-                                className="project-card"
+                                transition={{ delay: index * 0.08 }}
+                                className={`project-card ${hoveredIndex === index ? 'is-hovered' : ''}`}
                                 onClick={() => handleCardClick(project, index)}
+                                onMouseEnter={() => setHoveredIndex(index)}
+                                onMouseLeave={() => setHoveredIndex(-1)}
                             >
                                 <div
                                     className="project-image-wrapper"
@@ -146,24 +172,54 @@ const Projects = () => {
                                 >
                                     <div className="project-metric text-mono">{project.metric}</div>
                                     <span className="project-number text-mono">0{index + 1}</span>
+
+                                    {/* Click-to-explore overlay */}
+                                    <div className="project-hover-overlay">
+                                        <div className="project-hover-content">
+                                            <Eye size={24} />
+                                            <span className="text-mono">Click to Explore</span>
+                                        </div>
+                                    </div>
                                 </div>
 
                                 <div className="project-info">
                                     <p className="text-mono project-category">{project.category}</p>
-                                    <h3 className="project-title">{project.title}</h3>
+                                    <h3 className="project-title">{project.title}<span className="text-coral">.</span></h3>
+
+                                    {/* Tech highlights */}
+                                    <div className="project-highlights">
+                                        {project.highlights && project.highlights.map(h => (
+                                            <span key={h} className="project-highlight-pill text-mono">{h}</span>
+                                        ))}
+                                    </div>
+
                                     <p className="project-desc">{project.description}</p>
-                                    <span className="view-project-link text-mono">View Details ↗</span>
+
+                                    <div className="project-card-footer">
+                                        <span className="view-project-link text-mono">
+                                            View Details <ArrowUpRight size={13} />
+                                        </span>
+                                        <div className="project-tech-mini text-mono">
+                                            {project.techStack.slice(0, 3).join(' · ')}
+                                        </div>
+                                    </div>
                                 </div>
                             </motion.div>
                         ))}
                     </motion.div>
                 </div>
 
-                <div className="projects-progress-bar">
-                    <motion.div
-                        className="projects-progress-fill"
-                        style={{ scaleX: scrollYProgress }}
-                    />
+                {/* Progress indicator */}
+                <div className="projects-progress">
+                    <div className="projects-progress-track">
+                        <motion.div
+                            className="projects-progress-fill"
+                            style={{ scaleX: scrollYProgress }}
+                        />
+                    </div>
+                    <span className="projects-scroll-hint text-mono">
+                        Scroll to browse →
+                    </span>
                 </div>
             </section>
 

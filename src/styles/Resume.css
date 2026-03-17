@@ -1,0 +1,190 @@
+.resume-section {
+    position: relative;
+    overflow: hidden;
+    padding: 6rem 0;
+}
+
+.resume-bg {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+}
+
+.resume-bg-gradient {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(180deg, #1A1714 0%, #1F1C18 40%, #252220 70%, #1A1714 100%);
+}
+
+.resume-bg-noise {
+    position: absolute;
+    inset: 0;
+    opacity: 0.03;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+    background-size: 128px;
+    mix-blend-mode: overlay;
+}
+
+.resume-bg-glow {
+    position: absolute;
+    width: 500px;
+    height: 500px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(201, 168, 130, 0.1) 0%, transparent 70%);
+    top: -10%;
+    right: -10%;
+    filter: blur(120px);
+    pointer-events: none;
+}
+
+.resume-content {
+    position: relative;
+    z-index: 2;
+}
+
+.resume-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    margin-bottom: 2.5rem;
+}
+
+.resume-title {
+    font-family: var(--font-heading);
+    font-size: clamp(3rem, 8vw, 7rem);
+    color: #F2EEE8;
+    line-height: 0.9;
+    letter-spacing: -0.03em;
+    margin-bottom: 0.5rem;
+}
+
+.resume-subtitle {
+    font-size: 0.68rem;
+    letter-spacing: 0.15em;
+    color: rgba(242, 238, 232, 0.35);
+}
+
+.resume-download-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.7rem 1.5rem;
+    background: var(--color-primary);
+    color: var(--color-white);
+    border-radius: 100px;
+    transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    text-decoration: none;
+}
+
+.resume-download-btn .text-mono {
+    font-size: 0.65rem;
+    letter-spacing: 0.1em;
+    color: var(--color-white);
+}
+
+.resume-download-btn:hover {
+    background: #D85A46;
+    box-shadow: 0 8px 25px rgba(239, 109, 88, 0.3);
+}
+
+.resume-preview-wrapper {
+    border-radius: 16px;
+    overflow: hidden;
+    border: 1px solid rgba(242, 238, 232, 0.08);
+    background: rgba(255, 255, 255, 0.03);
+}
+
+.resume-preview-topbar {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 0.75rem 1.25rem;
+    background: rgba(242, 238, 232, 0.04);
+    border-bottom: 1px solid rgba(242, 238, 232, 0.06);
+}
+
+.topbar-dots {
+    display: flex;
+    gap: 6px;
+}
+
+.topbar-dots span {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: rgba(242, 238, 232, 0.12);
+}
+
+.topbar-dots span:first-child { background: #EF6D58; }
+.topbar-dots span:nth-child(2) { background: #C9A882; }
+.topbar-dots span:nth-child(3) { background: #5D6D3E; }
+
+.topbar-filename {
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+    font-size: 0.6rem;
+    letter-spacing: 0.06em;
+    color: rgba(242, 238, 232, 0.4);
+}
+
+.resume-embed-container {
+    height: 70vh;
+    min-height: 500px;
+    max-height: 800px;
+}
+
+.resume-embed {
+    width: 100%;
+    height: 100%;
+    border: none;
+    display: block;
+}
+
+.resume-fallback {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+    height: 100%;
+    color: rgba(242, 238, 232, 0.4);
+    text-align: center;
+    padding: 3rem;
+}
+
+.resume-fallback p {
+    font-size: 0.95rem;
+}
+
+.resume-fallback-link {
+    padding: 0.6rem 1.2rem;
+    border: 1px solid rgba(242, 238, 232, 0.15);
+    border-radius: 100px;
+    font-size: 0.62rem;
+    letter-spacing: 0.1em;
+    color: rgba(242, 238, 232, 0.6);
+    transition: all 0.3s ease;
+}
+
+.resume-fallback-link:hover {
+    border-color: var(--color-primary);
+    color: var(--color-primary);
+}
+
+@media (max-width: 768px) {
+    .resume-section {
+        padding: 4rem 0;
+    }
+
+    .resume-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 1rem;
+    }
+
+    .resume-embed-container {
+        height: 50vh;
+        min-height: 350px;
+    }
+}

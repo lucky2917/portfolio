@@ -1,0 +1,218 @@
+.skills-section {
+    position: relative;
+    overflow: hidden;
+    padding: 6rem 0;
+}
+
+.skills-bg {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+}
+
+.skills-bg-gradient {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(180deg, #1A1714 0%, #1F1C18 40%, #252220 70%, #1A1714 100%);
+}
+
+.skills-bg-noise {
+    position: absolute;
+    inset: 0;
+    opacity: 0.03;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+    background-size: 128px;
+    mix-blend-mode: overlay;
+}
+
+.skills-bg-glow {
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(120px);
+    pointer-events: none;
+}
+
+.skills-bg-glow-1 {
+    width: 500px;
+    height: 500px;
+    background: radial-gradient(circle, rgba(93, 109, 62, 0.12) 0%, transparent 70%);
+    top: -15%;
+    right: -10%;
+    animation: skillGlow1 20s ease-in-out infinite;
+}
+
+.skills-bg-glow-2 {
+    width: 400px;
+    height: 400px;
+    background: radial-gradient(circle, rgba(239, 109, 88, 0.08) 0%, transparent 70%);
+    bottom: -10%;
+    left: -5%;
+    animation: skillGlow2 25s ease-in-out infinite;
+}
+
+@keyframes skillGlow1 {
+    0%, 100% { transform: translate(0, 0); }
+    50% { transform: translate(30px, 20px); }
+}
+
+@keyframes skillGlow2 {
+    0%, 100% { transform: translate(0, 0); }
+    50% { transform: translate(-20px, -30px); }
+}
+
+.skills-content {
+    position: relative;
+    z-index: 2;
+}
+
+.skills-header {
+    margin-bottom: 2.5rem;
+}
+
+.skills-title {
+    font-family: var(--font-heading);
+    font-size: clamp(3rem, 8vw, 7rem);
+    color: #F2EEE8;
+    line-height: 0.9;
+    letter-spacing: -0.03em;
+    margin-bottom: 0.5rem;
+}
+
+.skills-subtitle {
+    font-size: 0.68rem;
+    letter-spacing: 0.15em;
+    color: rgba(242, 238, 232, 0.35);
+}
+
+.skills-tabs {
+    display: flex;
+    gap: 0.5rem;
+    margin-bottom: 3rem;
+    flex-wrap: wrap;
+}
+
+.skills-tab {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.6rem 1.2rem;
+    border-radius: 100px;
+    border: 1px solid rgba(242, 238, 232, 0.1);
+    background: transparent;
+    color: rgba(242, 238, 232, 0.5);
+    font-size: 0.65rem;
+    letter-spacing: 0.1em;
+    cursor: pointer;
+    transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.skills-tab:hover {
+    border-color: rgba(242, 238, 232, 0.2);
+    color: rgba(242, 238, 232, 0.8);
+}
+
+.skills-tab.active {
+    border-color: var(--tab-color);
+    color: #F2EEE8;
+    background: rgba(242, 238, 232, 0.05);
+}
+
+.tab-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    opacity: 0.5;
+    transition: opacity 0.3s;
+}
+
+.skills-tab.active .tab-dot {
+    opacity: 1;
+}
+
+.skills-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.25rem 3rem;
+    margin-bottom: 3rem;
+}
+
+.skill-item {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.skill-info {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+}
+
+.skill-name {
+    font-size: 0.95rem;
+    color: #F2EEE8;
+}
+
+.skill-level {
+    font-size: 0.6rem;
+    letter-spacing: 0.08em;
+    color: rgba(242, 238, 232, 0.35);
+}
+
+.skill-bar-track {
+    height: 3px;
+    background: rgba(242, 238, 232, 0.06);
+    border-radius: 2px;
+    overflow: hidden;
+}
+
+.skill-bar-fill {
+    height: 100%;
+    border-radius: 2px;
+    transform-origin: left;
+}
+
+.skills-summary {
+    display: flex;
+    gap: 3rem;
+    padding-top: 2rem;
+    border-top: 1px solid rgba(242, 238, 232, 0.06);
+}
+
+.summary-stat {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+}
+
+.summary-number {
+    font-family: var(--font-heading);
+    font-size: 2rem;
+    color: var(--color-primary);
+    letter-spacing: -0.02em;
+}
+
+.summary-label {
+    font-size: 0.58rem;
+    letter-spacing: 0.12em;
+    color: rgba(242, 238, 232, 0.3);
+}
+
+@media (max-width: 768px) {
+    .skills-section {
+        padding: 4rem 0;
+    }
+
+    .skills-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .skills-summary {
+        flex-wrap: wrap;
+        gap: 2rem;
+    }
+
+    .skills-tabs {
+        gap: 0.4rem;
+    }
+}

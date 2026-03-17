@@ -1,0 +1,193 @@
+.github-section {
+    position: relative;
+    overflow: hidden;
+    padding: 6rem 0;
+    background: linear-gradient(180deg, #F2EEE8 0%, #EDE8E0 50%, #F2EEE8 100%);
+}
+
+.github-bg {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+}
+
+.github-bg-gradient {
+    position: absolute;
+    inset: 0;
+    opacity: 0.015;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+    background-size: 128px;
+}
+
+.github-bg-glow {
+    position: absolute;
+    width: 500px;
+    height: 500px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(93, 109, 62, 0.06) 0%, transparent 70%);
+    bottom: -20%;
+    left: -10%;
+    filter: blur(100px);
+}
+
+.github-content {
+    position: relative;
+    z-index: 2;
+}
+
+.github-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    margin-bottom: 2.5rem;
+}
+
+.github-title {
+    font-family: var(--font-heading);
+    font-size: clamp(3rem, 8vw, 7rem);
+    line-height: 0.9;
+    letter-spacing: -0.03em;
+    margin-bottom: 0.5rem;
+}
+
+.github-subtitle {
+    font-size: 0.68rem;
+    letter-spacing: 0.15em;
+    opacity: 0.4;
+}
+
+.github-profile-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.5rem 1rem;
+    border: 1px solid rgba(61, 48, 37, 0.12);
+    border-radius: 100px;
+    transition: all 0.3s ease;
+}
+
+.github-profile-link .text-mono {
+    font-size: 0.65rem;
+    letter-spacing: 0.08em;
+}
+
+.github-profile-link:hover {
+    border-color: var(--color-primary);
+    background: rgba(239, 109, 88, 0.04);
+}
+
+.github-feed {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.github-event {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 1rem 1.25rem;
+    background: rgba(255, 255, 255, 0.5);
+    backdrop-filter: blur(8px);
+    border: 1px solid rgba(61, 48, 37, 0.05);
+    border-radius: 12px;
+    transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.github-event:hover {
+    transform: translateX(6px);
+    border-color: rgba(239, 109, 88, 0.15);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.04);
+}
+
+.event-icon-wrap {
+    width: 36px;
+    height: 36px;
+    min-width: 36px;
+    border-radius: 10px;
+    background: rgba(61, 48, 37, 0.05);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--color-primary);
+}
+
+.event-body {
+    flex: 1;
+    min-width: 0;
+}
+
+.event-repo {
+    font-size: 0.62rem;
+    letter-spacing: 0.08em;
+    color: var(--color-primary);
+    display: block;
+    margin-bottom: 0.15rem;
+}
+
+.event-message {
+    font-size: 0.9rem;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    opacity: 0.75;
+}
+
+.event-time {
+    display: flex;
+    align-items: center;
+    gap: 0.35rem;
+    color: rgba(61, 48, 37, 0.35);
+    white-space: nowrap;
+}
+
+.event-time .text-mono {
+    font-size: 0.55rem;
+    letter-spacing: 0.06em;
+}
+
+.github-loading {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.github-skeleton {
+    height: 56px;
+    background: rgba(61, 48, 37, 0.04);
+    border-radius: 12px;
+    animation: shimmer 1.5s ease-in-out infinite;
+}
+
+.github-skeleton:nth-child(2) { animation-delay: 0.1s; }
+.github-skeleton:nth-child(3) { animation-delay: 0.2s; }
+.github-skeleton:nth-child(4) { animation-delay: 0.3s; }
+
+@keyframes shimmer {
+    0%, 100% { opacity: 0.4; }
+    50% { opacity: 0.8; }
+}
+
+.github-error {
+    text-align: center;
+    padding: 3rem;
+    font-size: 0.7rem;
+    letter-spacing: 0.1em;
+    opacity: 0.4;
+}
+
+@media (max-width: 768px) {
+    .github-section {
+        padding: 4rem 0;
+    }
+
+    .github-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 1rem;
+    }
+
+    .event-time {
+        display: none;
+    }
+}

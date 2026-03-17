@@ -1,0 +1,531 @@
+/* ─── Hero Section ─────────────────────────────────────────────────── */
+
+.hero-section {
+    min-height: 100vh;
+    min-height: 100dvh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    position: relative;
+    overflow: hidden;
+    padding-top: 6rem;
+    padding-bottom: 2rem;
+    box-sizing: border-box;
+}
+
+/* ─── Layout: Two Columns ──────────────────────────────────────────── */
+
+.hero-layout {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: clamp(2rem, 5vw, 6rem);
+    align-items: center;
+    position: relative;
+    z-index: 5;
+}
+
+/* ─── Left Column ──────────────────────────────────────────────────── */
+
+.hero-left {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.hero-greeting {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    font-size: 0.75rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    opacity: 0.5;
+}
+
+.greeting-line {
+    display: inline-block;
+    width: 40px;
+    height: 1px;
+    background: var(--color-text);
+    opacity: 0.3;
+}
+
+/* ─── Title ────────────────────────────────────────────────────────── */
+
+.hero-title {
+    font-family: var(--font-heading);
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+    line-height: 0.9;
+}
+
+.hero-title-line {
+    font-size: clamp(3rem, 7.5vw, 7.5rem);
+    font-weight: 900;
+    letter-spacing: -0.04em;
+    display: block;
+}
+
+.hero-title-line .text-coral {
+    display: inline-block;
+    transition: transform 0.3s ease;
+}
+
+.hero-title-line:hover .text-coral {
+    transform: scale(1.2) rotate(-5deg);
+}
+
+/* ─── Bio ──────────────────────────────────────────────────────────── */
+
+.hero-bio-wrapper {
+    max-width: 520px;
+}
+
+.hero-bio {
+    font-size: 1.05rem;
+    line-height: 1.8;
+}
+
+.word-span {
+    display: inline;
+    transition: color 0.2s ease;
+}
+
+/* ─── Tech Stack Tags ──────────────────────────────────────────────── */
+
+.hero-stack {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.45rem;
+    width: 100%;
+}
+
+.hero-tag {
+    background: transparent;
+    padding: 0.35rem 0.85rem;
+    border-radius: 100px;
+    font-size: 0.68rem;
+    border: 1px solid var(--color-muted);
+    letter-spacing: 0.08em;
+    transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    cursor: default;
+}
+
+.hero-tag:hover {
+    border-color: var(--color-primary);
+    background: rgba(239, 109, 88, 0.06);
+    transform: translateY(-2px);
+}
+
+/* ─── CTA Links ────────────────────────────────────────────────────── */
+
+.hero-links {
+    display: flex;
+    gap: 0.75rem;
+    align-items: center;
+    flex-wrap: wrap;
+    margin-top: 0.5rem;
+}
+
+.hero-cta-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.65rem 1.4rem;
+    border-radius: 100px;
+    border: 1px solid var(--color-muted);
+    transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    cursor: pointer;
+    text-decoration: none;
+}
+
+.hero-cta-text {
+    font-size: 0.72rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+}
+
+.hero-cta-arrow {
+    font-size: 0.9rem;
+    transition: transform 0.3s ease;
+}
+
+.hero-cta-link:hover {
+    border-color: var(--color-primary);
+    background: rgba(239, 109, 88, 0.04);
+    transform: translateY(-2px);
+}
+
+.hero-cta-link:hover .hero-cta-arrow {
+    transform: translate(3px, -3px);
+}
+
+/* ─── Primary CTA ──────────────────────────────────────────────────── */
+
+.hero-cta-primary {
+    background: var(--color-primary);
+    border-color: var(--color-primary);
+    color: var(--color-white) !important;
+}
+
+.hero-cta-primary .hero-cta-text,
+.hero-cta-primary .hero-cta-arrow {
+    color: var(--color-white);
+}
+
+.hero-cta-primary:hover {
+    background: #D85A46;
+    border-color: #D85A46;
+    box-shadow: 0 8px 30px rgba(239, 109, 88, 0.35);
+}
+
+.hero-cta-primary:hover .hero-cta-arrow {
+    transform: translateX(4px);
+}
+
+/* ─── Right Column: Photo Area ─────────────────────────────────────── */
+
+.hero-right {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    aspect-ratio: 1;
+    max-width: 480px;
+    justify-self: center;
+}
+
+/* ─── Photo Orbit Rings ────────────────────────────────────────────── */
+
+.hero-photo-orbit {
+    position: absolute;
+    inset: -20px;
+    border-radius: 50%;
+}
+
+.photo-ring {
+    position: absolute;
+    inset: 0;
+    border-radius: 50%;
+    border: 1.5px solid transparent;
+    border-top-color: var(--color-primary);
+    border-right-color: rgba(239, 109, 88, 0.3);
+    animation: ringRotate 8s linear infinite;
+}
+
+.photo-ring-2 {
+    inset: -12px;
+    border-top-color: var(--color-secondary);
+    border-right-color: rgba(93, 109, 62, 0.3);
+    border-left-color: rgba(93, 109, 62, 0.15);
+    animation: ringRotateReverse 12s linear infinite;
+}
+
+@keyframes ringRotate {
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+@keyframes ringRotateReverse {
+    to {
+        transform: rotate(-360deg);
+    }
+}
+
+/* ─── Orbiting Dots ────────────────────────────────────────────────── */
+
+.orbit-dot {
+    position: absolute;
+    inset: 0;
+}
+
+.orbit-dot::after {
+    content: '';
+    position: absolute;
+    border-radius: 50%;
+    background: var(--color-primary);
+}
+
+.orbit-dot-1::after {
+    top: 0;
+    left: 50%;
+    width: 8px;
+    height: 8px;
+    transform: translateX(-50%);
+    box-shadow: 0 0 12px rgba(239, 109, 88, 0.5);
+}
+
+.orbit-dot-2::after {
+    bottom: 10%;
+    right: 0;
+    width: 6px;
+    height: 6px;
+    background: var(--color-secondary);
+    box-shadow: 0 0 10px rgba(93, 109, 62, 0.4);
+}
+
+.orbit-dot-3::after {
+    top: 40%;
+    left: 0;
+    width: 5px;
+    height: 5px;
+    background: var(--color-muted);
+    box-shadow: 0 0 8px rgba(221, 184, 166, 0.4);
+}
+
+/* ─── Photo ────────────────────────────────────────────────────────── */
+
+.hero-photo-wrapper {
+    position: relative;
+    width: 75%;
+    aspect-ratio: 1;
+    border-radius: 50%;
+    overflow: hidden;
+    will-change: transform;
+    box-shadow:
+        0 25px 80px rgba(0, 0, 0, 0.12),
+        0 8px 25px rgba(0, 0, 0, 0.08);
+}
+
+.hero-photo {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center top;
+    display: block;
+    transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.hero-photo-wrapper:hover .hero-photo {
+    transform: scale(1.05);
+}
+
+.photo-overlay {
+    position: absolute;
+    inset: 0;
+    border-radius: 50%;
+    background: linear-gradient(135deg,
+            rgba(239, 109, 88, 0.05) 0%,
+            transparent 50%,
+            rgba(93, 109, 62, 0.05) 100%);
+    pointer-events: none;
+}
+
+/* ─── Floating Shapes ──────────────────────────────────────────────── */
+
+.hero-float-shape {
+    position: absolute;
+    pointer-events: none;
+}
+
+.shape-1 {
+    top: 5%;
+    right: 5%;
+    width: 20px;
+    height: 20px;
+    border: 2px solid var(--color-primary);
+    border-radius: 4px;
+    opacity: 0.4;
+}
+
+.shape-2 {
+    bottom: 15%;
+    left: 5%;
+    width: 12px;
+    height: 12px;
+    background: var(--color-secondary);
+    border-radius: 50%;
+    opacity: 0.35;
+}
+
+.shape-3 {
+    top: 35%;
+    left: -5%;
+    width: 0;
+    height: 0;
+    border-left: 8px solid transparent;
+    border-right: 8px solid transparent;
+    border-bottom: 14px solid var(--color-primary);
+    opacity: 0.25;
+}
+
+/* ─── Status Badge ─────────────────────────────────────────────────── */
+
+.hero-status-badge {
+    position: absolute;
+    bottom: 12%;
+    right: -5%;
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    background: rgba(255, 255, 255, 0.85);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    padding: 0.6rem 1.2rem;
+    border-radius: 100px;
+    border: 1px solid rgba(61, 48, 37, 0.06);
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.06);
+    z-index: 10;
+}
+
+.hero-status-badge .text-mono {
+    font-size: 0.65rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    white-space: nowrap;
+}
+
+.status-pulse {
+    width: 8px;
+    height: 8px;
+    background: #4CAF50;
+    border-radius: 50%;
+    animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+
+    0%,
+    100% {
+        box-shadow: 0 0 0 0 rgba(76, 175, 80, 0.5);
+    }
+
+    50% {
+        box-shadow: 0 0 0 6px rgba(76, 175, 80, 0);
+    }
+}
+
+/* ─── Scroll Prompt ────────────────────────────────────────────────── */
+
+.hero-scroll-prompt {
+    position: absolute;
+    bottom: 2rem;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.75rem;
+    z-index: 10;
+}
+
+.hero-scroll-prompt .text-mono {
+    font-size: 0.58rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    opacity: 0.35;
+}
+
+.scroll-prompt-line {
+    width: 1px;
+    height: 40px;
+    background: var(--color-primary);
+    transform-origin: top;
+    opacity: 0.5;
+}
+
+/* ═══════════════════════════════════════════════════════════════════
+   Responsive
+   ═══════════════════════════════════════════════════════════════════ */
+
+@media (max-width: 1440px) and (min-width: 1025px) {
+    .hero-right {
+        max-width: 400px;
+    }
+
+    .hero-title-line {
+        font-size: clamp(2.8rem, 6vw, 5.5rem);
+    }
+
+    .hero-bio {
+        font-size: 0.95rem;
+    }
+}
+
+@media (max-width: 1024px) {
+    .hero-layout {
+        grid-template-columns: 1fr;
+        text-align: center;
+    }
+
+    .hero-left {
+        align-items: center;
+        order: 2;
+    }
+
+    .hero-right {
+        order: 1;
+        max-width: 280px;
+    }
+
+    .hero-bio-wrapper {
+        max-width: 600px;
+    }
+
+    .hero-links {
+        justify-content: center;
+    }
+
+    .hero-stack {
+        justify-content: center;
+    }
+
+    .hero-greeting {
+        justify-content: center;
+    }
+
+    .hero-status-badge {
+        right: -10%;
+        bottom: 5%;
+    }
+
+    .hero-scroll-prompt {
+        display: none;
+    }
+}
+
+@media (max-width: 768px) {
+    .hero-section {
+        padding-top: 5rem;
+    }
+
+    .hero-title-line {
+        font-size: clamp(2.2rem, 10vw, 3.5rem);
+    }
+
+    .hero-right {
+        max-width: 220px;
+    }
+
+    .hero-float-shape {
+        display: none;
+    }
+
+    .hero-status-badge {
+        position: relative;
+        right: auto;
+        bottom: auto;
+        margin-top: 1rem;
+        align-self: center;
+    }
+
+    .hero-cta-link {
+        padding: 0.55rem 1rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .hero-title-line {
+        font-size: 2.2rem;
+    }
+
+    .hero-right {
+        max-width: 180px;
+    }
+
+    .hero-photo-orbit {
+        inset: -10px;
+    }
+}

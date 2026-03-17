@@ -10,6 +10,9 @@ html {
     font-size: 16px;
     scroll-behavior: auto;
     /* Handled by Lenis */
+    -webkit-text-size-adjust: 100%;
+    /* Prevent Safari auto font-size adjustments */
+    text-size-adjust: 100%;
 }
 
 body {
@@ -60,6 +63,9 @@ button {
 .text-huge {
     font-size: clamp(4rem, 12vw, 13rem);
     line-height: 0.88;
+    overflow-wrap: break-word;
+    /* Prevent text overflow in Safari */
+    word-break: normal;
 }
 
 .text-coral {
