@@ -11,6 +11,7 @@ import Skills from './sections/Skills'
 import GitHubActivity from './sections/GitHubActivity'
 import Resume from './sections/Resume'
 import Contact from './sections/Contact'
+import Footer from './components/Footer'
 import './styles/main.css'
 
 function App() {
@@ -64,19 +65,7 @@ function App() {
             <Contact />
           </main>
 
-          <footer className="container section footer">
-            <div className="line-divider" style={{ marginBottom: '2rem' }}></div>
-            <div className="footer-content">
-              <p className="text-huge" style={{ fontSize: '2rem' }}>RAVI SANKAR<span className="text-coral">.</span></p>
-              <div className="footer-links text-mono">
-                <a href="#work" onClick={(e) => { e.preventDefault(); window.lenis?.scrollTo('#work') }}>Work</a>
-                <a href="#skills" onClick={(e) => { e.preventDefault(); window.lenis?.scrollTo('#skills') }}>Skills</a>
-                <a href="#github" onClick={(e) => { e.preventDefault(); window.lenis?.scrollTo('#github') }}>GitHub</a>
-                <a href="#contact" onClick={(e) => { e.preventDefault(); window.lenis?.scrollTo('#contact') }}>Contact</a>
-              </div>
-              <p className="text-mono" style={{ opacity: 0.5 }}>© 2026 Crafted with Precision</p>
-            </div>
-          </footer>
+          <Footer />
         </>
       )}
     </div>

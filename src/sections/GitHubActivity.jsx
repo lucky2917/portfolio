@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { motion } from 'framer-motion'
-import { GitCommit, GitBranch, Star, ArrowUpRight, Clock } from 'lucide-react'
+import { GitCommit, GitBranch, Star, ArrowUpRight, Clock, BookOpen } from 'lucide-react'
 import '../styles/GitHubActivity.css'
 
 const GITHUB_USERNAME = 'lucky2917'
@@ -50,22 +50,45 @@ const getEventDescription = (event) => {
     }
 }
 
+const generateCalendar = () => {
+    const calendar = []
+    const today = new Date()
+    for (let i = 29; i >= 0; i--) {
+        const d = new Date(today)
+        d.setDate(d.getDate() - i)
+        calendar.push(d.toISOString().split('T')[0])
+    }
+    return calendar
+}
+
 const GitHubActivity = () => {
     const [events, setEvents] = useState([])
+    const [repos, setRepos] = useState([])
     const [loading, setLoading] = useState(true)
     const [error, setError] = useState(null)
+    const [activityMap, setActivityMap] = useState({})
 
     useEffect(() => {
-        fetch(`https://api.github.com/users/${GITHUB_USERNAME}/events?per_page=15`)
-            .then(res => {
-                if (!res.ok) throw new Error('Failed to fetch')
-                return res.json()
+        Promise.all([
+            fetch(`https://api.github.com/users/${GITHUB_USERNAME}/events?per_page=100`),
+            fetch(`https://api.github.com/users/${GITHUB_USERNAME}/repos?sort=updated&per_page=4`)
+        ])
+            .then(([resEvents, resRepos]) => {
+                if (!resEvents.ok || !resRepos.ok) throw new Error('Failed to fetch')
+                return Promise.all([resEvents.json(), resRepos.json()])
             })
-            .then(data => {
-                const filtered = data
+            .then(([eventsData, reposData]) => {
+                const filtered = eventsData
                     .filter(e => ['PushEvent', 'CreateEvent', 'WatchEvent', 'ForkEvent', 'IssuesEvent', 'PullRequestEvent'].includes(e.type))
-                    .slice(0, 8)
-                setEvents(filtered)
+
+                const map = {}
+                eventsData.forEach(e => {
+                    const date = e.created_at.split('T')[0]
+                    map[date] = (map[date] || 0) + 1
+                })
+                setActivityMap(map)
+                setEvents(filtered.slice(0, 5))
+                setRepos(reposData)
                 setLoading(false)
             })
             .catch(err => {
@@ -74,11 +97,15 @@ const GitHubActivity = () => {
             })
     }, [])
 
+    const calendar = generateCalendar()
+
     return (
         <section id="github" className="github-section">
             <div className="github-bg">
                 <div className="github-bg-gradient" />
-                <div className="github-bg-glow" />
+                <div className="github-bg-noise" />
+                <div className="github-bg-glow github-bg-glow-1" />
+                <div className="github-bg-glow github-bg-glow-2" />
             </div>
 
             <div className="container github-content">
@@ -92,7 +119,7 @@ const GitHubActivity = () => {
                         <h2 className="github-title">
                             GITHUB<span className="text-coral">.</span>
                         </h2>
-                        <p className="github-subtitle text-mono">Recent Activity</p>
+                        <p className="github-subtitle text-mono">Activity & Repositories</p>
                     </div>
                     <motion.a
                         href={`https://github.com/${GITHUB_USERNAME}`}
@@ -109,48 +136,124 @@ const GitHubActivity = () => {
                     </motion.a>
                 </motion.div>
 
-                <div className="github-feed">
-                    {loading && (
-                        <div className="github-loading">
-                            {[...Array(4)].map((_, i) => (
-                                <div key={i} className="github-skeleton" />
-                            ))}
-                        </div>
-                    )}
-
-                    {error && (
-                        <div className="github-error text-mono">
-                            Unable to load activity. Visit my profile directly.
-                        </div>
-                    )}
-
-                    {!loading && !error && events.map((event, i) => {
-                        const Icon = getEventIcon(event.type)
-                        return (
+                <div className="github-grid">
+                    <div className="github-column">
+                        {!loading && !error && (
                             <motion.div
-                                key={event.id}
-                                className="github-event"
-                                initial={{ opacity: 0, y: 15 }}
-                                whileInView={{ opacity: 1, y: 0 }}
+                                className="github-analytics-container"
+                                initial={{ opacity: 0, scale: 0.98 }}
+                                whileInView={{ opacity: 1, scale: 1 }}
                                 viewport={{ once: true }}
-                                transition={{ delay: i * 0.06 }}
                             >
-                                <div className="event-icon-wrap">
-                                    <Icon size={16} />
+                                <div className="github-analytics-header">
+                                    <p className="github-box-title text-mono" style={{marginBottom: 0}}>30 Days Contributions</p>
                                 </div>
-                                <div className="event-body">
-                                    <span className="event-repo text-mono">
-                                        {event.repo?.name?.split('/')[1] || event.repo?.name}
+                                <div className="github-total-display">
+                                    <span className="total-num">
+                                        {calendar.reduce((sum, date) => sum + (activityMap[date] || 0), 0)}
                                     </span>
-                                    <p className="event-message">{getEventDescription(event)}</p>
+                                    <span className="total-text text-mono">Total Activities</span>
                                 </div>
-                                <div className="event-time">
-                                    <Clock size={12} />
-                                    <span className="text-mono">{getRelativeTime(event.created_at)}</span>
+                                <div className="github-graph">
+                                    {calendar.map((date) => {
+                                        const count = activityMap[date] || 0
+                                        let level = 0
+                                        if (count > 0 && count <= 2) level = 1
+                                        else if (count > 2 && count <= 4) level = 2
+                                        else if (count > 4 && count <= 6) level = 3
+                                        else if (count > 6) level = 4
+
+                                        return (
+                                            <div
+                                                key={date}
+                                                className={`github-day level-${level}`}
+                                                title={`${count} contributions on ${date}`}
+                                            />
+                                        )
+                                    })}
                                 </div>
                             </motion.div>
-                        )
-                    })}
+                        )}
+
+                        <div className="github-repos-container">
+                            <p className="github-box-title text-mono" style={{marginBottom: '1rem'}}>Recent Repositories</p>
+                            <div className="github-repos">
+                            {loading && (
+                                <div className="github-loading">
+                                    {[...Array(2)].map((_, i) => <div key={i} className="github-skeleton repo-skeleton" />)}
+                                </div>
+                            )}
+                            {!loading && !error && repos.map((repo, i) => (
+                                <motion.a
+                                    key={repo.id}
+                                    href={repo.html_url}
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    className="github-repo-card"
+                                    initial={{ opacity: 0, x: -15 }}
+                                    whileInView={{ opacity: 1, x: 0 }}
+                                    viewport={{ once: true }}
+                                    transition={{ delay: i * 0.1 }}
+                                >
+                                    <div className="repo-header">
+                                        <BookOpen size={16} />
+                                        <span className="repo-name">{repo.name}</span>
+                                    </div>
+                                    <p className="repo-desc">{repo.description || 'No description provided.'}</p>
+                                    <div className="repo-stats">
+                                        {repo.language && <span className="repo-lang text-mono"><span className="lang-dot"></span>{repo.language}</span>}
+                                        <span className="repo-star text-mono"><Star size={10} /> {repo.stargazers_count}</span>
+                                    </div>
+                                </motion.a>
+                            ))}
+                            </div>
+                        </div>
+                    </div>
+
+                    <div className="github-column">
+                        <p className="github-box-title text-mono" style={{marginBottom: '1rem'}}>Contribution Activity</p>
+                        <div className="github-feed">
+                            {loading && (
+                                <div className="github-loading">
+                                    {[...Array(4)].map((_, i) => <div key={i} className="github-skeleton" />)}
+                                </div>
+                            )}
+
+                            {error && (
+                                <div className="github-error text-mono">
+                                    Unable to load activity. Visit my profile directly.
+                                </div>
+                            )}
+
+                            {!loading && !error && events.map((event, i) => {
+                                const Icon = getEventIcon(event.type)
+                                return (
+                                    <motion.div
+                                        key={event.id}
+                                        className="github-event"
+                                        initial={{ opacity: 0, y: 15 }}
+                                        whileInView={{ opacity: 1, y: 0 }}
+                                        viewport={{ once: true }}
+                                        transition={{ delay: i * 0.06 }}
+                                    >
+                                        <div className="event-icon-wrap">
+                                            <Icon size={16} />
+                                        </div>
+                                        <div className="event-body">
+                                            <span className="event-repo text-mono">
+                                                {event.repo?.name?.split('/')[1] || event.repo?.name}
+                                            </span>
+                                            <p className="event-message">{getEventDescription(event)}</p>
+                                        </div>
+                                        <div className="event-time">
+                                            <Clock size={12} />
+                                            <span className="text-mono">{getRelativeTime(event.created_at)}</span>
+                                        </div>
+                                    </motion.div>
+                                )
+                            })}
+                        </div>
+                    </div>
                 </div>
             </div>
         </section>

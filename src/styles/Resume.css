@@ -61,7 +61,8 @@
 .resume-subtitle {
     font-size: 0.68rem;
     letter-spacing: 0.15em;
-    color: rgba(242, 238, 232, 0.35);
+    color: rgba(242, 238, 232, 0.4);
+    text-transform: uppercase;
 }
 
 .resume-download-btn {
@@ -88,19 +89,22 @@
 }
 
 .resume-preview-wrapper {
-    border-radius: 16px;
+    border-radius: 12px;
     overflow: hidden;
-    border: 1px solid rgba(242, 238, 232, 0.08);
-    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(242, 238, 232, 0.15);
+    background: rgba(26, 23, 20, 0.6);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+    max-width: 900px;
+    margin: 0 auto;
 }
 
 .resume-preview-topbar {
     display: flex;
     align-items: center;
     gap: 1rem;
-    padding: 0.75rem 1.25rem;
-    background: rgba(242, 238, 232, 0.04);
-    border-bottom: 1px solid rgba(242, 238, 232, 0.06);
+    padding: 0.8rem 1.25rem;
+    background: rgba(26, 23, 20, 0.9);
+    border-bottom: 1px solid rgba(242, 238, 232, 0.1);
 }
 
 .topbar-dots {
@@ -129,9 +133,10 @@
 }
 
 .resume-embed-container {
-    height: 70vh;
-    min-height: 500px;
-    max-height: 800px;
+    height: 75vh;
+    min-height: 600px;
+    max-height: 850px;
+    width: 100%;
 }
 
 .resume-embed {
@@ -184,7 +189,7 @@
     }
 
     .resume-embed-container {
-        height: 50vh;
-        min-height: 350px;
+        height: 60vh;
+        min-height: 400px;
     }
 }

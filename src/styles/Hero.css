@@ -1,16 +1,39 @@
 /* ─── Hero Section ─────────────────────────────────────────────────── */
 
 .hero-section {
-    min-height: 100vh;
-    min-height: 100dvh;
+    height: 250vh;
+    display: block;
+    position: relative;
+    padding: 0;
+}
+
+.hero-sticky {
+    position: sticky;
+    top: 0;
+    height: 100vh;
+    height: 100dvh;
     display: flex;
     flex-direction: column;
     justify-content: center;
-    position: relative;
     overflow: hidden;
     padding-top: 6rem;
     padding-bottom: 2rem;
     box-sizing: border-box;
+}
+
+/* ─── Scroll Progress Indicator ────────────────────────────────────── */
+
+.hero-scroll-progress {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: linear-gradient(90deg, var(--color-primary), #FF8A65);
+    transform-origin: left;
+    z-index: 1000;
+    border-radius: 0 2px 2px 0;
+    box-shadow: 0 0 12px rgba(239, 109, 88, 0.4);
 }
 
 /* ─── Layout: Two Columns ──────────────────────────────────────────── */
@@ -83,13 +106,17 @@
 }
 
 .hero-bio {
-    font-size: 1.05rem;
-    line-height: 1.8;
+    font-size: clamp(0.95rem, 1.5vw, 1.15rem);
+    line-height: 1.7;
+    font-weight: 500;
+    letter-spacing: -0.015em;
+    color: var(--color-text);
 }
 
 .word-span {
     display: inline;
-    transition: color 0.2s ease;
+    will-change: opacity, color;
+    transition: none;
 }
 
 /* ─── Tech Stack Tags ──────────────────────────────────────────────── */
@@ -438,10 +465,6 @@
     .hero-title-line {
         font-size: clamp(2.8rem, 6vw, 5.5rem);
     }
-
-    .hero-bio {
-        font-size: 0.95rem;
-    }
 }
 
 @media (max-width: 1024px) {
@@ -458,6 +481,11 @@
     .hero-right {
         order: 1;
         max-width: 280px;
+        width: 280px;
+        margin: 0 auto;
+        justify-self: center;
+        aspect-ratio: auto;
+        flex-direction: column;
     }
 
     .hero-bio-wrapper {
@@ -477,8 +505,11 @@
     }
 
     .hero-status-badge {
-        right: -10%;
-        bottom: 5%;
+        position: relative;
+        right: auto;
+        bottom: auto;
+        margin-top: 0.75rem;
+        align-self: center;
     }
 
     .hero-scroll-prompt {
@@ -487,8 +518,9 @@
 }
 
 @media (max-width: 768px) {
-    .hero-section {
+    .hero-sticky {
         padding-top: 5rem;
+        overflow: visible;
     }
 
     .hero-title-line {
@@ -496,19 +528,23 @@
     }
 
     .hero-right {
-        max-width: 220px;
+        max-width: 180px;
+        min-height: 180px;
+        margin: 0 auto;
+    }
+
+    .hero-photo-wrapper {
+        min-width: 140px;
+        min-height: 140px;
+        margin: 0 auto;
+    }
+
+    .hero-photo-orbit {
+        inset: -12px;
     }
 
     .hero-float-shape {
         display: none;
-    }
-
-    .hero-status-badge {
-        position: relative;
-        right: auto;
-        bottom: auto;
-        margin-top: 1rem;
-        align-self: center;
     }
 
     .hero-cta-link {
@@ -522,7 +558,13 @@
     }
 
     .hero-right {
-        max-width: 180px;
+        max-width: 150px;
+        min-height: 150px;
+    }
+
+    .hero-photo-wrapper {
+        min-width: 120px;
+        min-height: 120px;
     }
 
     .hero-photo-orbit {

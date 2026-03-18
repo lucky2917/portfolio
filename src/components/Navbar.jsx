@@ -1,21 +1,54 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useRef } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import './Navbar.css'
 
 const Navbar = () => {
     const [isScrolled, setIsScrolled] = useState(false)
+    const [isVisible, setIsVisible] = useState(true)
     const [time, setTime] = useState(new Date())
     const [isOpen, setIsOpen] = useState(false)
+    
+    const lastScrollYRef = useRef(0)
 
     useEffect(() => {
-        const handleScroll = () => {
-            setIsScrolled(window.scrollY > 50)
+        let ticking = false
+        
+        const update = () => {
+            const currentY = window.scrollY || 0
+            const delta = currentY - lastScrollYRef.current
+            
+            setIsScrolled(currentY > 50)
+            
+            if (currentY < 16) {
+                setIsVisible(true)
+            } else if (delta > 2) {
+                // Scrolling down
+                setIsVisible(false)
+                setIsOpen(false)
+            } else if (delta < -2) {
+                // Scrolling up
+                setIsVisible(true)
+            }
+            
+            lastScrollYRef.current = currentY
+            ticking = false
         }
-        window.addEventListener('scroll', handleScroll)
+
+        const onScroll = () => {
+            if (!ticking) {
+                ticking = true
+                requestAnimationFrame(update)
+            }
+        }
+
+        window.addEventListener('scroll', onScroll, { passive: true })
         const timer = setInterval(() => setTime(new Date()), 1000)
 
+        // Initial check
+        update()
+
         return () => {
-            window.removeEventListener('scroll', handleScroll)
+            window.removeEventListener('scroll', onScroll)
             clearInterval(timer)
         }
     }, [])
@@ -47,7 +80,7 @@ const Navbar = () => {
     }
 
     return (
-        <nav className={`navbar-wrapper ${isScrolled ? 'scrolled' : ''}`}>
+        <nav className={`navbar-wrapper ${isScrolled ? 'scrolled' : ''} ${!isVisible ? 'hidden' : ''}`}>
             <div className="navbar-container container">
                 <div className="nav-left">
                     <a href="#" className="nav-logo" onClick={(e) => handleScrollTo(e, 'top')}>

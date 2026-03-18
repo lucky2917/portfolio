@@ -33,7 +33,7 @@ const projects = [
         description: 'Skill-based hiring platform with blind candidate evaluation, project-based assessments, OTP verification, and protection against SQL injection & XSS.',
         fullDescription: 'SkillHire was born at a competitive hackathon — a full-stack hiring platform that eliminates resume bias through blind candidate evaluation and project-based assessments. Employers get data-driven tools for candidate comparison, skill mapping, and performance analytics. Security was a first-class concern with OTP verification, secure sessions, and protection against SQL injection and XSS.',
         color: '#5D6D3E',
-        image: '/skillhire.png',
+        image: '/skillhire.jpg',
         link: 'https://github.com/lucky2917/SkillHire',
         role: 'Full-Stack Developer',
         year: 'Apr 2025',
@@ -54,7 +54,7 @@ const projects = [
         description: 'Full-stack sports facility booking system with dynamic pricing, time-slot reservations, OTP signup, and an admin dashboard with role-based access.',
         fullDescription: 'Book Your Game (BYG) is a comprehensive sports facility booking system supporting 25+ arenas with sport-wise dynamic pricing, add-ons, and time-slot–based reservations. It features a complete authentication flow with OTP signup, email verification, bcrypt hashing, and session management. An admin dashboard provides real-time monitoring of bookings, revenue, and add-on performance with role-based access control.',
         color: '#DDB8A6',
-        image: '/byg.png',
+        image: '/byg.jpg',
         link: 'https://github.com/lucky2917/byg_',
         role: 'Full-Stack Developer',
         year: 'Mar 2025',
@@ -192,8 +192,6 @@ const Projects = () => {
                                             <span key={h} className="project-highlight-pill text-mono">{h}</span>
                                         ))}
                                     </div>
-
-                                    <p className="project-desc">{project.description}</p>
 
                                     <div className="project-card-footer">
                                         <span className="view-project-link text-mono">

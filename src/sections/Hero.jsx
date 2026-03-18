@@ -1,10 +1,9 @@
 import React, { useRef, useEffect } from 'react'
-import { motion, useMotionValue, useTransform, useSpring } from 'framer-motion'
+import { motion, useMotionValue, useTransform, useSpring, useScroll } from 'framer-motion'
 import '../styles/Hero.css'
 import AuroraBackground from '../components/AuroraBackground'
 import FloatingParticles from '../components/FloatingParticles'
 
-// Splits text into words, animating each word's opacity from 0.15→1
 const ScrollRevealText = ({ text, progress, startOffset, endOffset, className }) => {
     const words = text.split(' ')
 
@@ -14,14 +13,12 @@ const ScrollRevealText = ({ text, progress, startOffset, endOffset, className })
                 const wordStart = startOffset + (i / words.length) * (endOffset - startOffset)
                 const wordEnd = startOffset + ((i + 1) / words.length) * (endOffset - startOffset)
 
-                // eslint-disable-next-line react-hooks/rules-of-hooks
                 const opacity = useTransform(progress, [wordStart, wordEnd], [0.15, 1])
 
-                // eslint-disable-next-line react-hooks/rules-of-hooks
                 const color = useTransform(
                     progress,
-                    [Math.max(0, wordStart - 0.005), wordStart, wordEnd, Math.min(1, wordEnd + 0.005)],
-                    ['var(--color-text)', 'var(--color-primary)', 'var(--color-primary)', 'var(--color-text)']
+                    [wordStart, wordEnd],
+                    ['rgba(61,48,37,0.3)', 'var(--color-text)']
                 )
 
                 return (
@@ -35,8 +32,14 @@ const ScrollRevealText = ({ text, progress, startOffset, endOffset, className })
 }
 
 const Hero = () => {
-    const progress = useMotionValue(0)
-    const animDoneRef = useRef(false)
+    const containerRef = useRef(null)
+    const { scrollYProgress } = useScroll({
+        target: containerRef,
+        offset: ['start start', 'end end']
+    })
+
+    // Map the scroll progress of the container to our 0-1 text reveal
+    const progress = useTransform(scrollYProgress, [0, 0.8], [0, 1])
 
     // Parallax for the photo
     const mouseX = useMotionValue(0)
@@ -55,45 +58,19 @@ const Hero = () => {
         return () => window.removeEventListener('mousemove', handleMouseMove)
     }, [mouseX, mouseY])
 
-    useEffect(() => {
-        const TOTAL_DELTA = 2200
-        let accumulated = 0
-
-        const stopLenis = () => window.lenis?.stop()
-        const startLenis = () => window.lenis?.start()
-
-        const timer = setTimeout(stopLenis, 100)
-
-        const onWheel = (e) => {
-            if (animDoneRef.current) return
-            e.preventDefault()
-
-            accumulated = Math.min(TOTAL_DELTA, Math.max(0, accumulated + e.deltaY))
-            const p = accumulated / TOTAL_DELTA
-            progress.set(p)
-
-            if (p >= 1) {
-                animDoneRef.current = true
-                startLenis()
-            }
-        }
-
-        window.addEventListener('wheel', onWheel, { passive: false })
-
-        return () => {
-            clearTimeout(timer)
-            window.removeEventListener('wheel', onWheel)
-            startLenis()
-        }
-    }, [progress])
-
     return (
-        <section className="hero-section">
-            <AuroraBackground />
-            <FloatingParticles count={20} />
+        <section ref={containerRef} className="hero-section">
+            <div className="hero-sticky">
+                {/* Coral scroll progress indicator */}
+                <motion.div
+                    className="hero-scroll-progress"
+                    style={{ scaleX: scrollYProgress }}
+                />
 
-            <div className="hero-layout container">
-                {/* ─── Left Column: Text Content ─── */}
+                <AuroraBackground />
+                <FloatingParticles count={20} />
+
+                <div className="hero-layout container">
                 <div className="hero-left">
                     <motion.div
                         initial={{ opacity: 0, y: 60 }}
@@ -125,9 +102,17 @@ const Hero = () => {
                         className="hero-bio-wrapper"
                     >
                         <ScrollRevealText
-                            text="Hi, I'm Ravi. I'm a Full-Stack Developer and student who loves building things from scratch. I try to take what I learn and apply it to the real world, which recently led me to build and maintain a live platform for a startup. I enjoy working across the whole stack—from the backend logic to the user interface—and I'm always eager to grow by tackling hands-on projects"
+                            text="Hi, I'm Ravi. I’m a Computer Science student who enjoys solving problems and building practical web applications. I work mainly with data structures and the MERN stack, focusing on writing clean, simple, and reliable code."
                             progress={progress}
                             startOffset={0.02}
+                            endOffset={0.5}
+                            className="hero-bio"
+                        />
+                        <br />
+                        <ScrollRevealText
+                            text="I like turning ideas into real projects with clear design and functionality, and I’m always improving how I think about systems and scalability. Right now, I’m focused to learn, build, and grow."
+                            progress={progress}
+                            startOffset={0.5}
                             endOffset={1.0}
                             className="hero-bio"
                         />
@@ -192,7 +177,7 @@ const Hero = () => {
                         style={{ x: photoX, y: photoY }}
                     >
                         <img
-                            src="/ravi-photo.jpeg"
+                            src="/ravi-photo.jpg"
                             alt="Ravi Sankar Gandreddi"
                             className="hero-photo"
                         />
@@ -227,6 +212,14 @@ const Hero = () => {
                         <span className="text-mono">Available for Work</span>
                     </motion.div>
                 </motion.div>
+
+                <motion.div
+                    className="hero-right-badge-wrapper"
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    transition={{ delay: 1 }}
+                >
+                </motion.div>
             </div>
 
             {/* Scroll prompt */}
@@ -243,6 +236,7 @@ const Hero = () => {
                     transition={{ duration: 2, repeat: Infinity, ease: 'easeInOut' }}
                 />
             </motion.div>
+            </div>
         </section>
     )
 }

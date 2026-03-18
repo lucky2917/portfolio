@@ -18,7 +18,8 @@ const Resume = () => {
                     className="resume-header"
                     initial={{ opacity: 0, y: 30 }}
                     whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: true }}
+                    viewport={{ once: true, margin: "-100px" }}
+                    transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
                 >
                     <div className="resume-header-left">
                         <h2 className="resume-title">
@@ -44,10 +45,10 @@ const Resume = () => {
 
                 <motion.div
                     className="resume-preview-wrapper"
-                    initial={{ opacity: 0, y: 30 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: true }}
-                    transition={{ delay: 0.15 }}
+                    initial={{ opacity: 0, scale: 0.98, y: 40 }}
+                    whileInView={{ opacity: 1, scale: 1, y: 0 }}
+                    viewport={{ once: true, margin: "-100px" }}
+                    transition={{ duration: 0.8, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
                 >
                     <div className="resume-preview-topbar">
                         <div className="topbar-dots">

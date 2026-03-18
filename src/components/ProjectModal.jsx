@@ -53,10 +53,13 @@ const ProjectModal = ({ project, index, onClose }) => {
     useEffect(() => {
         const original = document.body.style.overflow
         document.body.style.overflow = 'hidden'
+        window.lenis?.stop()
+
         const onKey = (e) => e.key === 'Escape' && onClose()
         window.addEventListener('keydown', onKey)
         return () => {
             document.body.style.overflow = original
+            window.lenis?.start()
             window.removeEventListener('keydown', onKey)
         }
     }, [onClose])
@@ -93,7 +96,7 @@ const ProjectModal = ({ project, index, onClose }) => {
                     variants={panelVariants}
                     onClick={(e) => e.stopPropagation()}
                 >
-                    <motion.div className="modal-panel" variants={stagger}>
+                    <motion.div className="modal-panel" variants={stagger} data-lenis-prevent="true">
                         <button className="modal-close" onClick={onClose}>
                             <X size={18} />
                         </button>

@@ -7,42 +7,25 @@ const categories = [
         id: 'languages',
         title: 'Languages',
         color: '#EF6D58',
-        skills: [
-            { name: 'JavaScript', level: 90 },
-            { name: 'C++', level: 75 },
-            { name: 'Java', level: 70 },
-            { name: 'PHP', level: 80 },
-            { name: 'SQL', level: 85 },
-            { name: 'HTML/CSS', level: 90 }
-        ]
+        skills: ['C++', 'Java', 'JavaScript', 'PHP']
     },
     {
         id: 'frameworks',
-        title: 'Frameworks & Libraries',
+        title: 'Frameworks',
         color: '#5D6D3E',
-        skills: [
-            { name: 'React', level: 88 },
-            { name: 'Node.js', level: 85 },
-            { name: 'Express.js', level: 85 },
-            { name: 'Framer Motion', level: 75 },
-            { name: 'TailwindCSS', level: 80 },
-            { name: 'REST APIs', level: 85 }
-        ]
+        skills: ['HTML & CSS', 'TailwindCSS', 'NodeJS', 'ReactJS', 'ExpressJS']
     },
     {
         id: 'tools',
-        title: 'Tools & Databases',
+        title: 'Tools/Platforms',
         color: '#C9A882',
-        skills: [
-            { name: 'PostgreSQL', level: 85 },
-            { name: 'MongoDB', level: 75 },
-            { name: 'MySQL', level: 80 },
-            { name: 'Redis', level: 65 },
-            { name: 'Supabase', level: 80 },
-            { name: 'Docker', level: 60 },
-            { name: 'Git', level: 85 },
-            { name: 'Postman', level: 80 }
-        ]
+        skills: ['MySQL', 'MongoDB', 'PostgreSQL', 'Redis', 'Postman', 'Docker']
+    },
+    {
+        id: 'softskills',
+        title: 'Soft Skills',
+        color: '#8A6D96',
+        skills: ['Problem-Solving', 'Team Player', 'Adaptability']
     }
 ]
 
@@ -98,25 +81,15 @@ const Skills = () => {
                     >
                         {activeCat.skills.map((skill, i) => (
                             <motion.div
-                                key={skill.name}
-                                className="skill-item"
-                                initial={{ opacity: 0, x: -20 }}
-                                animate={{ opacity: 1, x: 0 }}
+                                key={skill}
+                                className="skill-item-card"
+                                initial={{ opacity: 0, scale: 0.95 }}
+                                animate={{ opacity: 1, scale: 1 }}
                                 transition={{ delay: i * 0.05 }}
+                                style={{ '--accent': activeCat.color }}
                             >
-                                <div className="skill-info">
-                                    <span className="skill-name">{skill.name}</span>
-                                    <span className="skill-level text-mono">{skill.level}%</span>
-                                </div>
-                                <div className="skill-bar-track">
-                                    <motion.div
-                                        className="skill-bar-fill"
-                                        style={{ background: activeCat.color }}
-                                        initial={{ scaleX: 0 }}
-                                        animate={{ scaleX: skill.level / 100 }}
-                                        transition={{ delay: i * 0.05 + 0.2, duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
-                                    />
-                                </div>
+                                <div className="skill-dot" />
+                                <span className="skill-name">{skill}</span>
                             </motion.div>
                         ))}
                     </motion.div>
