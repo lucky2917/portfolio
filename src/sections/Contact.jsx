@@ -12,7 +12,7 @@ const Contact = () => {
     const formRef = useRef(null)
     const [formData, setFormData] = useState({ from_name: '', from_email: '', message: '' })
     const [errors, setErrors] = useState({})
-    const [status, setStatus] = useState('idle') // idle | sending | success | error
+    const [status, setStatus] = useState('idle')
     const [charCount, setCharCount] = useState(0)
 
     const validate = () => {

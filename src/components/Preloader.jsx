@@ -3,7 +3,7 @@ import { motion, AnimatePresence } from 'framer-motion'
 import './Preloader.css'
 
 const Preloader = ({ onComplete }) => {
-    const [phase, setPhase] = useState('counting') // 'counting' → 'name' → 'done'
+    const [phase, setPhase] = useState('counting')
     const [count, setCount] = useState(0)
 
     useEffect(() => {

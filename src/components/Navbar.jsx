@@ -22,11 +22,9 @@ const Navbar = () => {
             if (currentY < 16) {
                 setIsVisible(true)
             } else if (delta > 2) {
-                // Scrolling down
                 setIsVisible(false)
                 setIsOpen(false)
             } else if (delta < -2) {
-                // Scrolling up
                 setIsVisible(true)
             }
             
@@ -44,7 +42,6 @@ const Navbar = () => {
         window.addEventListener('scroll', onScroll, { passive: true })
         const timer = setInterval(() => setTime(new Date()), 1000)
 
-        // Initial check
         update()
 
         return () => {

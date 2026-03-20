@@ -3,7 +3,7 @@ import { motion, useSpring, useMotionValue } from 'framer-motion'
 import './CursorFollower.css'
 
 const CursorFollower = () => {
-    const [cursorState, setCursorState] = useState('default') // 'default', 'hover', 'orange'
+    const [cursorState, setCursorState] = useState('default')
     const [isVisible, setIsVisible] = useState(false)
 
     // Instant position for the dot

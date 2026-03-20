@@ -38,10 +38,8 @@ const Hero = () => {
         offset: ['start start', 'end end']
     })
 
-    // Map the scroll progress of the container to our 0-1 text reveal
     const progress = useTransform(scrollYProgress, [0, 0.8], [0, 1])
 
-    // Parallax for the photo
     const mouseX = useMotionValue(0)
     const mouseY = useMotionValue(0)
     const springConfig = { damping: 25, stiffness: 150 }
