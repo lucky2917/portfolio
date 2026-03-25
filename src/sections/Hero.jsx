@@ -175,7 +175,7 @@ const Hero = () => {
                         style={{ x: photoX, y: photoY }}
                     >
                         <img
-                            src="/ravi-photo.jpg"
+                            src="/ravi-photo.png"
                             alt="Ravi Sankar Gandreddi"
                             className="hero-photo"
                         />
