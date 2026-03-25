@@ -8,6 +8,7 @@ import Hero from './sections/Hero'
 import Projects from './sections/Projects'
 import Freelance from './sections/Freelance'
 import Skills from './sections/Skills'
+import Certificates from './sections/Certificates'
 import GitHubActivity from './sections/GitHubActivity'
 import Resume from './sections/Resume'
 import Contact from './sections/Contact'
@@ -60,6 +61,7 @@ function App() {
             <Projects />
             <Freelance />
             <Skills />
+            <Certificates />
             <GitHubActivity />
             <Resume />
             <Contact />
